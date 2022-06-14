@@ -5,11 +5,11 @@ import com.android.apksigner.core.internal.util.ByteBufferDataSource
 import com.android.apksigner.core.util.DataSource
 import com.android.build.FilterData
 import com.android.build.gradle.api.BaseVariant
-import com.google.common.base.Charsets
-import com.google.common.hash.HashCode
-import com.google.common.hash.HashFunction
-import com.google.common.hash.Hashing
-import com.google.common.io.Files
+import org.gradle.internal.impldep.com.google.common.base.Charsets
+import org.gradle.internal.impldep.com.google.common.hash.HashCode
+import org.gradle.internal.impldep.com.google.common.hash.HashFunction
+import org.gradle.internal.impldep.com.google.common.hash.Hashing
+import org.gradle.internal.impldep.com.google.common.io.Files
 import com.google.gson.Gson
 import groovy.text.SimpleTemplateEngine
 import org.apache.commons.io.FileUtils
@@ -28,10 +28,18 @@ class ChannelMaker extends DefaultTask {
 
     private static final String DOT_APK = ".apk";
 
-    @Input
     public BaseVariant variant;
-    @Input
     public Project targetProject;
+
+    @Input
+    BaseVariant getVariant() {
+        return variant
+    }
+
+    @Input
+    Project getTargetProject() {
+        return targetProject
+    }
 
     public void setup() {
         description "Make Multi-Channel"
